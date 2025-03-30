@@ -1,0 +1,6 @@
+apiVersion: v2
+name: argocd-oci
+description: Argo CD OCI Helm Chart
+type: application
+version: 0.1.0
+

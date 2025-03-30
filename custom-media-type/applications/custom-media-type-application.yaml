@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: custom-media-type
+  namespace: ${ARGOCD_NAMESPACE}
+spec:
+  destination:
+    namespace: custom-media-type
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    path: .
+    repoURL: oci://${REGISTRY_REPOSITORY_URL}/custom-media-type
+    targetRevision: latest
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true

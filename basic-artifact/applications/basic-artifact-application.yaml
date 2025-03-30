@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: basic-artifact
+  namespace: ${ARGOCD_NAMESPACE}
+spec:
+  destination:
+    namespace: basic-artifact
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    path: .
+    repoURL: oci://${REGISTRY_REPOSITORY_URL}/basic-artifact
+    targetRevision: latest
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
